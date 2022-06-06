@@ -93,7 +93,6 @@ def mythread():
         #id = str(99779844055)
         returned = check_id(id)
         if returned:
-            print(f"[./] {id}")
             stats("found")
             ctypes.windll.kernel32.SetConsoleTitleW(f"Threads: {str(threading.active_count())} Failed: {str(failed)} Found: {str(found)}")
             with global_lock:
