@@ -1,5 +1,5 @@
 import requests
-from random import randint, choice
+import random
 import threading
 from time import sleep
 import ctypes
@@ -32,7 +32,7 @@ while proxyChoose:
         proxyChoose = False
 
 def check_id(id):
-    proxy = {f'https': f'{proxyType}://{choice(proxyList)}'}
+    proxy = {f'https': f'{proxyType}://{random.choice(proxyList)}'}
     url = "https://us05www3.zoom.us:443/conf/j"
     headers = {
         "User-Agent": "Mozilla/5.0 (ZOOM.Win 10.0 x64)", 
@@ -87,7 +87,11 @@ def readProxiesFile():
 
 def mythread():
     while True:
-        id = str(randint(80000000000, 99999999999))
+        rand=random.uniform(0, 1)
+        if rand > 0.5:
+            id=random.randint(8000000000, 9999999999)
+        else: #else, make it a 10 char code
+            id=random.randint(80000000000, 99999999999)
         #id = str(99779844055)
         returned = check_id(id)
         if returned:
