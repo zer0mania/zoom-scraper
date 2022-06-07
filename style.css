@@ -15,3 +15,6 @@ font-family: "Courier New";
 display: block;
 text-align: center;
 }
+a:visited{
+color: rgb(0, 0, 0);  
+}
