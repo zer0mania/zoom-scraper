@@ -89,7 +89,7 @@ def readProxiesFile():
 
 def mythread():
     while True:
-        id = str(randint(10000000000, 99999999999))
+        id = str(randint(80000000000, 99999999999))
         #id = str(99779844055)
         returned = check_id(id)
         if returned:
