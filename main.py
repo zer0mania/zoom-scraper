@@ -99,7 +99,7 @@ def mythread():
             ctypes.windll.kernel32.SetConsoleTitleW(f"Threads: {str(threading.active_count()-1)} Failed: {str(failed)} Found: {str(found)}")
             with global_lock:
                 with open("ids.html", "a") as file:
-                    file.write(f'\n<a href="https://zoom.us/j/{id}">{found}: https://zoom.us/j/{id}</a>')
+                    file.write(f'\n<a class="code" href="https://zoom.us/j/{id}">{found}: https://zoom.us/j/{id}</a>')
                     file.write("<br>")
         else:
             stats("failed")
