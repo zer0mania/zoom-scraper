@@ -1,0 +1,17 @@
+a {
+border: solid 3px white;
+border-radius: 5px;
+color: white;
+background-color: darkgreen;
+font-weight: bold;
+font-family: "Courier New";
+margin: 1px;
+display: block;
+text-align: center;
+}
+h2{
+color: white;
+font-family: "Courier New";
+display: block;
+text-align: center;
+}
