@@ -1,4 +1,3 @@
-from urllib import response
 import requests
 from random import randint, choice
 import threading
@@ -13,7 +12,7 @@ found = 0
 
 global_lock = threading.Lock()
 
-ctypes.windll.kernel32.SetConsoleTitleW(f"Threads: {str(threading.active_count())} Failed: {str(failed)} Found: {str(found)}")
+ctypes.windll.kernel32.SetConsoleTitleW(f"Threads: {str(threading.active_count()-1)} Failed: {str(failed)} Found: {str(found)}")
 
 requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -45,14 +44,13 @@ def check_id(id):
     try:
         response = requests.post(url, headers=headers, data=data, proxies=proxy, verify=False)
     except:
-        return False
-
-    if "Meeting not existed." in response.text:
-        print("You may be getting ratelimited.")
         return None
 
-    if not "web_client_join_url" in response.text:
-        print(response.text)
+    if "Meeting not existed." in response.text:
+        print("You may be getting ratelimited. (if you see alot of these switch your proxies)")
+        return None
+
+    if not "zoom" in response.text:
         return False
     else:
         print(response.text)
@@ -67,7 +65,7 @@ def stats(type):
 
 def write_to_file():
     with global_lock:
-        with open("ids.txt", "a") as file:
+        with open("ids.html", "a") as file:
             file.write(str(threading.get_ident()))
             file.write("\n")
 
@@ -94,14 +92,14 @@ def mythread():
         returned = check_id(id)
         if returned:
             stats("found")
-            ctypes.windll.kernel32.SetConsoleTitleW(f"Threads: {str(threading.active_count())} Failed: {str(failed)} Found: {str(found)}")
+            ctypes.windll.kernel32.SetConsoleTitleW(f"Threads: {str(threading.active_count()-1)} Failed: {str(failed)} Found: {str(found)}")
             with global_lock:
-                with open("ids.txt", "a") as file:
-                    file.write(id)
-                    file.write("\n")
+                with open("ids.html", "a") as file:
+                    file.write(f'\n<a href="https://zoom.us/j/{id}">{found}: https://zoom.us/j/{id}</a>')
+                    file.write("<br>")
         else:
             stats("failed")
-            ctypes.windll.kernel32.SetConsoleTitleW(f"Threads: {str(threading.active_count())} Failed: {str(failed)} Found: {str(found)}")
+            ctypes.windll.kernel32.SetConsoleTitleW(f"Threads: {str(threading.active_count()-1)} Failed: {str(failed)} Found: {str(found)}")
 
 proxyList = readProxiesFile()
 
