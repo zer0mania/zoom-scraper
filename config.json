@@ -1,0 +1,5 @@
+{
+	"automatic": "true",
+	"proxyType": "socks5",
+	"filename": "proxies.txt"
+}
