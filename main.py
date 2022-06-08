@@ -95,11 +95,7 @@ def readProxiesFile(_str):
 
 def mythread():
     while True:
-        rand=random.uniform(0, 1)
-        if rand > 0.5:
-            id=random.randint(8000000000, 9999999999)
-        else: #else, make it a 10 char code
-            id=random.randint(80000000000, 99999999999)
+        id=random.randint(80000000000, 99999999999)
         #id = str(99779844055)
         returned = check_id(id)
         if returned:
