@@ -2,6 +2,7 @@ import requests
 import random
 import threading
 from time import sleep
+from pystyle import Colorate, Colors
 import ctypes
 import sys
 import json
@@ -9,6 +10,14 @@ import os
 
 failed = 0
 found = 0
+
+banner1 = '''
+╔══╦═╦═╦══╗╔══╦═╦╦╦═╦═╦═╦╦╗
+╠╝╔╣║║║║║║║╠╗╚╣╠╣╔╣╩║╔╣╦╣╔╝
+╚══╩═╩═╩╩╩╝╚══╩═╩╝╚╩╩╝╚═╩╝═'''
+text = "Made By @zer0mania in collaboration with @Thomasaung12345 on GitHub"
+print(Colorate.Horizontal(Colors.rainbow, banner1))
+print(Colorate.Horizontal(Colors.rainbow, text))
 
 with open('config.json') as f:
     data = json.load(f)
@@ -113,7 +122,7 @@ if not automatic == "true":
     proxyList = readProxiesFile(filename)
 
 setTitle(f"Threads: {str(threading.active_count()-1)} Failed: {str(failed)} Found: {str(found)}")
-threads = int(input("Threads: "))
+threads = int(input("\nThreads: "))
 if automatic == "true":
     proxyChoose = True
     while proxyChoose:
