@@ -2,7 +2,6 @@ import requests
 import random
 import threading
 from time import sleep
-from pystyle import Colorate, Colors
 import ctypes
 import sys
 import json
@@ -11,13 +10,8 @@ import os
 failed = 0
 found = 0
 
-banner1 = '''
-╔══╦═╦═╦══╗╔══╦═╦╦╦═╦═╦═╦╦╗
-╠╝╔╣║║║║║║║╠╗╚╣╠╣╔╣╩║╔╣╦╣╔╝
-╚══╩═╩═╩╩╩╝╚══╩═╩╝╚╩╩╝╚═╩╝═'''
 text = "Made By @zer0mania in collaboration with @Thomasaung12345 on GitHub"
-print(Colorate.Horizontal(Colors.rainbow, banner1))
-print(Colorate.Horizontal(Colors.rainbow, text))
+print(text)
 
 with open('config.json') as f:
     data = json.load(f)
@@ -29,7 +23,7 @@ filename = data['filename']
 global_lock = threading.Lock()
 
 def check_id(id):
-    proxy = {f'https': f'{proxyType}://{random.choice(proxyList)}'}
+    proxy = {'http' if proxyType == 'http' and automatic == 'false' else 'https': f'{proxyType}://{random.choice(proxyList)}'}
     url = "https://us05www3.zoom.us:443/conf/j"
     headers = {
         "User-Agent": "Mozilla/5.0 (ZOOM.Win 10.0 x64)", 
@@ -39,6 +33,7 @@ def check_id(id):
     data = f"--------------------------e4989a6b36dcd724\r\nContent-Disposition: form-data; name=\"clientUserSameAsWebUser\"\r\n\r\n1\r\n--------------------------e4989a6b36dcd724\r\nContent-Disposition: form-data; name=\"cv\"\r\n\r\n5.10.7.6120\r\n--------------------------e4989a6b36dcd724\r\nContent-Disposition: form-data; name=\"deviceId\"\r\n\r\n{id}\r\n--------------------------e4989a6b36dcd724\r\nContent-Disposition: form-data; name=\"email\"\r\n\r\ncoolkid69@gmail.com\r\n--------------------------e4989a6b36dcd724\r\nContent-Disposition: form-data; name=\"mn\"\r\n\r\n{id}\r\n--------------------------e4989a6b36dcd724\r\nContent-Disposition: form-data; name=\"needWebCheckDLP\"\r\n\r\n0\r\n--------------------------e4989a6b36dcd724\r\nContent-Disposition: form-data; name=\"source\"\r\n\r\nclient\r\n--------------------------e4989a6b36dcd724\r\nContent-Disposition: form-data; name=\"uname\"\r\n\r\n{id}\r\n--------------------------e4989a6b36dcd724--\r\n"
     
     try:
+        print(proxy)
         response = requests.post(url, headers=headers, data=data, proxies=proxy)
     except:
         return None
